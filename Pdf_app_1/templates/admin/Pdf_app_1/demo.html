@@ -1,0 +1,136 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo</title>
+  <style type="text/css">
+    
+table {
+  border: 1px solid rgb(20, 20, 20);
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+    width:auto;
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgb(5, 39, 45)
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+/* general styling */
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+
+</style>
+</head>
+<body>
+    <div class='details'>
+        <h2>User Table</h2>
+        <table>
+            <caption>Statement Summary</caption>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th style="width:120px">E-mail</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Zip_Code</th>
+                <th  style="width:100px">Profile_Created_Date</th>
+                <th  style="width:100px">Profile_Updated_Date</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Job Title">{{user.name}}</td>
+                <td data-label="Location">{{user.age}}</td>
+                <td data-label="Department">{{user.email}}</td>
+                <td data-label="Posted">{{user.address}}</td>
+                <td data-label="Posted">{{user.phone}}</td>
+                <td data-label="Posted">{{user.country}}</td>
+                <td data-label="Posted">{{user.state}}</td>
+                <td data-label="Posted">{{user.city}}</td>
+                <td data-label="Posted">{{user.zip_code}}</td>
+                <td data-label="Posted">{{user.profile_created_date}}</td>
+                <td data-label="Posted">{{user.profile_updated_date}}</td>
+                
+                    
+            </tbody>
+          </table>
+    </div>
+</body>
+</html>
