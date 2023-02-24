@@ -1,0 +1,108 @@
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load static %}  
+  <link href="{% static 'css/new_email.css' %}" rel="stylesheet"> 
+  <script src="{% static '/js/swap_button.js' %}" type="text/javascript"></script>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body>
+      <div id="outercard">
+        <div id="innercard">
+          <span id="msg" style="color: black; font-size: x-large; font-weight: bold; font-style: italic;font-family: 'Times New Roman', Times, serif;"></span>
+          <form class="form" id="form1" method="post">
+            {% csrf_token %}
+            <div class="marquee">
+              <h1 style="color: black; font-size: larger; font-family: 'Times New Roman', Times, serif; font-style: italic; text-align: center;">Email Form</h1>
+            </div>
+            <p class="email">
+              <input name="from_email" type="text" class="validate[required,custom[email]] feedback-input"  id="email" placeholder="Email" required/>
+            </p>
+            
+            <p class="name">
+              <input name="subject" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Subject"  id="name" required/>
+            </p>
+            
+            <p class="text">
+              <textarea name="message" class="validate[required,length[6,300]] feedback-input" id="comment" placeholder="Message"></textarea>
+            </p>
+            
+            <div class="submit">
+              <input type="submit" value="SEND" id="button-blue" onmouseover="mouseOver()"  onclick="Showmessage()">
+              <div class="ease"></div>
+            </form>
+          </div>
+          <div id="back">
+            <h1 id="fff" style="text-align: center; margin: auto;"></h1>
+          </div>
+      </div>
+</body>
+</html>
+</form>
+<script>
+// First Code Example
+
+var a = 0;
+function mouseOver(){
+      const subject= document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('comment').value;
+      const face_front=document.querySelector(".face.front");
+      const face_back=document.querySelector(".face.back");
+      const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      console.log(a)
+      
+      if((subject== "" ||!email.match(emailCheck)|| message == "" ) && a==0){
+        buttonMoveLeft();
+        a = 1;
+        return false;
+      } 
+      if((subject == "" ||!email.match(emailCheck) || message == "" ) && a==1){ 
+        buttonMoveRight();
+        a = 0;
+        return false;
+      } 
+      if ((subject=="" && email.match(emailCheck) && message==message)){
+        buttonMoveLeft();
+      }  
+      
+      else{
+            document.getElementById('button-blue').style.cursor = 'pointer';
+            return true;
+        };
+       
+    };
+
+    function buttonMoveLeft(){
+      const button = document.getElementById('button-blue');
+      button.style.transform = 'translateX(-339%)';
+      
+    };
+    
+    function buttonMoveRight(){
+      
+      const button = document.getElementById('button-blue');
+      button.style.transform = 'translateX(-4%)';
+      
+    };
+    
+    function resetBtn(){
+        const button = document.getElementById('button-blue');
+        button.style.transform = 'translateX(0%)';
+    };
+
+    function Showmessage(){
+      message=document.getElementById('fff')
+      message.innerHTML = 'Your mail has been sent successfully !'  
+    }
+    
+  </script>
+</body>
+</html>
+
+

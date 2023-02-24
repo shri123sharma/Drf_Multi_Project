@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Subscription Ui</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- fontawesom icon link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+section{
+    width: 100vw;
+    height: 100vh;
+    background-color: #806bcd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    width: 20rem;
+    height: 22rem;
+    transform-style: preserve-3d;
+    perspective: 500;
+}
+.container .face{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transform-style: preserve-3d;
+    perspective: 500;
+    transition: 1s;
+    backface-visibility: hidden;
+}
+.container .face.front,
+.container .face.back{
+    padding: 15px 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container .face.front i.fa-envelope-o,
+.container .face.back i.fa-times,
+.container .face.back i.fa-check{
+    width: 4rem;
+    height: 4rem;
+    background-color: blueviolet;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 1.5rem;
+    border-radius: 50%;
+}
+.container .face.front h2{
+    margin-top: 0.5rem;
+}
+.container .face.front p{
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+.container .face.front input#email{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    background-color: #eee;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+.container.face.front input::placeholder{
+    color: #bbb;
+    font-weight: 500;
+}
+.container .face.front input#button{
+    width: 100%;
+    padding: 10px;
+    background-color: blueviolet;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.container .face.back i.fa-check,
+.container .face.back i.fa-times{
+    background-color: red;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+.container .face.back h2{
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+.container .face.back p{
+    margin-bottom: 2rem;
+}
+.container .face.back i.fa-check{
+    background-color: lawngreen;
+}
+
+.container .face.back{
+    transform: rotateY(180deg);
+}
+</style>
+    <section>
+        <div class="container">
+            <div class="face front">
+                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                <h2>Subscribe to our newsletter</h2>
+                <p>We'll send you only our new video source blog, We promise!</p>
+                <input type="email" id="email" class="email" placeholder="Enter Email...">
+                <input type="button" class="button" id="button" value="Subscribe" onclick="submitEmail()">
+            </div>
+            <div class="face back">
+                <i class="fa" aria-hidden="true"></i>
+                <h2></h2>
+                <p></p>
+            </div>
+        </div>
+    </section>
+    <script src="main.js">
+      const face_front = document.querySelector(".face.front");
+      const face_back = document.querySelector(".face.back");
+      const input_email = document.querySelector('input[type="email"]');
+      const icon = document.querySelector(".face.back i");
+      const h2 = document.querySelector(".face.back h2");
+      const p = document.querySelector(".face.back p");
+      
+      var valid_email = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      
+      var isMatch = true;
+      
+      function submitEmail(){
+          if(input_email.value.match(valid_email)){
+              isMatch=true;
+              icon.classList.add("fa-check");
+              h2.innerHTML = "Thank you for Subscribing our Blog!";
+              p.innerHTML = "We'll let you know about our new video's!";
+          }
+          else{
+              isMatch=false;
+              icon.classList.add("fa-times");
+              h2.innerHTML = "You have entered Email is incorrect!";
+              p.innerHTML = "Please check the Email once again!";
+          }
+      
+          face_front.style.transform = "rotateY(180deg)";
+          face_back.style.transform = "rotateY(360deg)";
+          timeout();
+      }
+      
+      function timeout(){
+          setTimeout(() => {
+              face_front.style.transform = "rotateY(0)";
+              face_back.style.transform = "rotateY(180deg)";
+              if(isMatch){
+                  icon.classList.remove("fa-check");
+              }else{
+                  icon.classList.remove("fa-times");
+              }
+          }, 3000);
+      }
+      </script>
+</body>
+</html>

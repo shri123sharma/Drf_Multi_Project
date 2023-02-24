@@ -14,3 +14,4 @@ class User(models.Model):
   zip_code = models.CharField(max_length=8, default="43701")
   profile_created_date=models.DateField(auto_now_add=True)
   profile_updated_date=models.DateField(auto_now=True)
+  
